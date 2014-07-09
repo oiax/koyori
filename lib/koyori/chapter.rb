@@ -17,6 +17,8 @@ module Koyori
         case @mode
         when 'normal'
           format_in_normal_mode(line)
+        when 'div'
+          format_in_div_mode(line)
         when 'unordered_list'
           format_in_unordered_list_mode(line)
         when 'ordered_list'
@@ -38,6 +40,9 @@ module Koyori
         level = Regexp.last_match[1].length
         text = Regexp.last_match[2]
         @html << Koyori::Heading.new(level, text).format
+      when %r{\A<div[^>]*>\s*\z}
+        @html << line + "\n"
+        @mode = 'div'
       when /\A\*\s+(.*)/
         @mode = 'unordered_list'
         @buffer = line + "\n"
@@ -50,6 +55,20 @@ module Koyori
         if Regexp.last_match[1]
           @path = Regexp.last_match[1]
         end
+      else
+        if line.match(/\A\s*\z/)
+          @html << "\n"
+        else
+          @html << Koyori::Paragraph.new(line).format
+        end
+      end
+    end
+
+    def format_in_div_mode(line)
+      case line
+      when %r{\A</div>\s*\z}
+        @html << "\n" + line
+        @mode = 'normal'
       else
         if line.match(/\A\s*\z/)
           @html << "\n"
