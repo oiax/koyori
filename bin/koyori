@@ -17,8 +17,12 @@ end
 def _main
   body = ''
   File.open('CHAPTERS') do |f|
-    f.read.gsub(/\r\n?/, "\n").each_line do |line|
-      body << line
+    f.read.gsub(/\r\n?/, "\n").each_line do |file_name|
+      file_name.chomp!
+      next if file_name == ''
+      File.open(file_name) do |g|
+        body << Koyori::Chapter.new(g.read).to_html
+      end
     end
   end
   File.open('book.html', 'w') do |f|
