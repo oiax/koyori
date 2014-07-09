@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+def main
+  Signal.trap(:INT) { exit 1 }
+  if RUBY_PLATFORM !~ /mswin(?!ce)|mingw|cygwin|bccwin/
+    Signal.trap(:PIPE, 'IGNORE')
+  end
+  _main
+rescue Errno::EPIPE
+  exit 0
+end
+
+def _main
+  File.open('CHAPTERS') do |f|
+    f.read.gsub(/\r\n?/, "\n").each_line do |line|
+      # DO SOMETHING
+    end
+  end
+end
+
+main
