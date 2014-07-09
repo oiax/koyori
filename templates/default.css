@@ -1,0 +1,16 @@
+pre.list {
+  font-size: 90%;
+  background-color: #ccc;
+  color: #000;
+  border: #999 solid 1px;
+  padding: 1em;
+}
+pre.list span.num {
+  color: #fff;
+}
+pre.list span.changed {
+  background-color: #888;
+}
+pre.list del {
+  background-color: #888;
+}
