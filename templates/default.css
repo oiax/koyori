@@ -1,8 +1,7 @@
 pre.list {
   font-size: 90%;
-  background-color: #ccc;
+  background-color: #ddd;
   color: #000;
-  border: #999 solid 1px;
   padding: 1em;
 }
 pre.list span.num {
@@ -13,4 +12,9 @@ pre.list span.changed {
 }
 pre.list del {
   background-color: #888;
+}
+pre.list span.path {
+  padding: 0.5em;
+  background-color: #666;
+  color: #fff;
 }
