@@ -7,8 +7,8 @@ pre.source-code {
 pre.source-code span.num {
   color: #fff;
 }
-pre.source-code span.changed {
-  background-color: #888;
+pre.source-code span.modified {
+  background-color: #fff;
 }
 pre.source-code del {
   background-color: #888;

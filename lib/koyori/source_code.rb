@@ -2,10 +2,14 @@ require 'cgi'
 
 module Koyori
   class SourceCode
+    MOD_SIGN = '◆'
+    DEL_SIGN = '◇'
+
     def initialize(text, path, starting_line_number)
       @text = text
       @path = path
       @starting_line_number = starting_line_number
+      @mode = 'normal'
     end
 
     def format
@@ -39,8 +43,64 @@ module Koyori
     def process(line)
       buffer = ''
       buffer << sprintf("<span class='num'>%03d:</span> ", @line_number)
-      buffer << line
+      buffer << add_tags(line)
       buffer << "\n"
+      buffer
+    end
+
+    def add_tags(line)
+      buffer = ''
+      str = line.dup
+      if str.sub!(/\A\s+/, '')
+        buffer << Regexp.last_match[0]
+      end
+      if @mode == 'modified'
+        buffer << "<span class='modified'>"
+      elsif @mode == 'deleted'
+        buffer << "<del>"
+      end
+      while str.length > 0
+        case @mode
+        when 'normal'
+          if str.match(/\A[^#{MOD_SIGN}#{DEL_SIGN}]+/)
+            buffer << CGI.escapeHTML(Regexp.last_match[0])
+            str = Regexp.last_match.post_match
+          elsif str.match(/\A#{MOD_SIGN}/)
+            buffer << "<span class='modified'>"
+            str = Regexp.last_match.post_match
+            @mode = 'modified'
+          elsif str.match(/\A#{DEL_SIGN}/)
+            buffer << "<del>"
+            str = Regexp.last_match.post_match
+            @mode = 'deleted'
+          else
+            raise
+          end
+        when 'modified'
+          if str.match(/\A[^#{MOD_SIGN}]+/)
+            buffer << CGI.escapeHTML(Regexp.last_match[0])
+            str = Regexp.last_match.post_match
+          elsif str.match(/\A#{MOD_SIGN}/)
+            buffer << "</span>"
+            str = Regexp.last_match.post_match
+            @mode = 'normal'
+          end
+        when 'deleted'
+          if str.match(/\A[^#{DEL_SIGN}]+/)
+            buffer << CGI.escapeHTML(Regexp.last_match[0])
+            str = Regexp.last_match.post_match
+          elsif str.match(/\A#{DEL_SIGN}/)
+            buffer << "</del>"
+            str = Regexp.last_match.post_match
+            @mode = 'normal'
+          end
+        end
+      end
+      if @mode == 'modified'
+        buffer << "</span>"
+      elsif @mode == 'deleted'
+        buffer << "</del>"
+      end
       buffer
     end
 
