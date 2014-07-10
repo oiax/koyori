@@ -8,7 +8,7 @@ module Koyori
     end
 
     def format
-      "<h#{@level}>#{CGI.escapeHTML(@text)}</h#{@level}>"
+      "<h#{@level}>" + Koyori::Text.new(@text).format + "</h#{@level}>"
     end
   end
 end

@@ -12,22 +12,22 @@ module Koyori
           raise "#{line}, #{tag}"
         end
         level = Regexp.last_match[1].length / 2
-        content = Regexp.last_match[2]
+        content = Koyori::Text.new(Regexp.last_match[2]).format
         if @current_level == nil
-          buffer << "<li>#{CGI.escapeHTML(content)}"
+          buffer << "<li>#{content}"
         elsif level == @current_level
           buffer << "</li>\n"
-          buffer << "<li>#{CGI.escapeHTML(content)}"
+          buffer << "<li>#{content}"
         elsif level == @current_level + 1
           buffer << "\n<#{tag}>\n"
-          buffer << "<li>#{CGI.escapeHTML(content)}"
+          buffer << "<li>#{content}"
         elsif level < @current_level
           (@current_level - level).times do
             buffer << "</li>\n"
             buffer << "</#{tag}>\n"
           end
           buffer << "</li>\n"
-          buffer << "<li>#{CGI.escapeHTML(content)}"
+          buffer << "<li>#{content}"
         end
         @current_level = level
       end

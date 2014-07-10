@@ -2,12 +2,12 @@ require 'cgi'
 
 module Koyori
   class Paragraph
-    def initialize(text)
-      @text = text
+    def initialize(content)
+      @content = content
     end
 
     def format
-      "<p>#{CGI.escapeHTML(@text)}</p>"
+      "<p>" + Koyori::Text.new(@content).format + "</p>"
     end
   end
 end
