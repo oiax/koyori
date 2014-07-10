@@ -109,7 +109,11 @@ module Koyori
     def format_in_pre_mode(line)
       case line
       when /\A```\s*\z/
-        @html << Koyori::Pre.new(@buffer, @path).format
+        if @path && @path != ''
+          @html << Koyori::SourceCode.new(@buffer, @path).format
+        else
+          @html << Koyori::Excerpt.new(@buffer).format
+        end
         @buffer = ''
         @path = nil
         @mode = 'normal'
