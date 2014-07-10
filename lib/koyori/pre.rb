@@ -9,9 +9,11 @@ module Koyori
 
     def format
       buffer = ''
-      buffer << "<pre class='list'>\n"
       if @path && @path != ''
+        buffer << "<pre class='list'>\n"
         buffer << "<div class='path'>#{@path}</div>\n"
+      else
+        buffer << "<pre class='excerpt'>\n"
       end
       @text.each_line do |line|
         buffer << CGI.escapeHTML(line)

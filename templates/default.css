@@ -18,6 +18,12 @@ pre.list div.path {
   background-color: #666;
   color: #fff;
 }
+pre.excerpt {
+  font-size: 90%;
+  border: 1px solid #888;
+  color: #000;
+  padding: 1em;
+}
 div.note {
   margin: 5%;
   padding: 2% 5%;
