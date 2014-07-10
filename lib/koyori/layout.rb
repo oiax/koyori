@@ -8,8 +8,8 @@ module Koyori
 
     def output
       basedir = File.expand_path(File.join(File.dirname(__FILE__), '..', '..'))
-      path1 = File.expand_path(File.join(basedir, 'templates', 'layout.html'))
-      path2 = File.expand_path(File.join(basedir, 'templates', 'default.css'))
+      path1 = File.join(basedir, 'templates', 'layout.html')
+      path2 = File.join(basedir, 'templates', 'default.css')
       html = File.open(path1).read
       css = File.open(path2).read.chomp
       html.sub(/%TITLE%/, @title)
