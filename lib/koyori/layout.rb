@@ -1,8 +1,9 @@
 module Koyori
   class Layout
-    def initialize(body)
+    def initialize(body, config)
       @body = body
-      @title = 'NO TITLE'
+      @config = config
+      @title = config['title'] || 'NO TITLE'
     end
 
     def output

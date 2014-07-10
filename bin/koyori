@@ -2,6 +2,7 @@
 
 $LOAD_PATH << File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
 
+require 'yaml'
 require 'koyori'
 
 def main
@@ -15,6 +16,8 @@ rescue Errno::EPIPE
 end
 
 def _main
+  config = YAML.load_file('config.yml')
+  
   body = ''
   File.open('CHAPTERS') do |f|
     f.read.gsub(/\r\n?/, "\n").each_line do |file_name|
@@ -27,7 +30,7 @@ def _main
     end
   end
   File.open('book.html', 'w') do |f|
-    f.write Koyori::Layout.new(body).output
+    f.write Koyori::Layout.new(body, config).output
   end
 end
 
