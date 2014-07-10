@@ -11,7 +11,7 @@ module Koyori
       buffer = ''
       buffer << "<pre class='list'>\n"
       if @path && @path != ''
-        buffer << "<span class='path'>#{@path}</span>\n"
+        buffer << "<div class='path'>#{@path}</div>\n"
       end
       @text.each_line do |line|
         buffer << CGI.escapeHTML(line)

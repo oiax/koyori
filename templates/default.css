@@ -13,8 +13,14 @@ pre.list span.changed {
 pre.list del {
   background-color: #888;
 }
-pre.list span.path {
+pre.list div.path {
   padding: 0.5em;
   background-color: #666;
   color: #fff;
+}
+div.note {
+  margin: 5%;
+  padding: 2% 5%;
+  border: 1px solid #666;
+  border-radius: 10px;
 }

@@ -43,6 +43,9 @@ module Koyori
       when %r{\A<div[^>]*>\s*\z}
         @html << line + "\n"
         @mode = 'div'
+      when %r{\A%%%\s*(.*)\z}
+        @html << Koyori::Div.new(line).open_tag
+        @mode = 'div'
       when /\A\*\s+(.*)/
         @mode = 'unordered_list'
         @buffer = line + "\n"
@@ -68,6 +71,9 @@ module Koyori
       case line
       when %r{\A</div>\s*\z}
         @html << "\n" + line
+        @mode = 'normal'
+      when %r{\A%%%\s*\z}
+        @html << "</div>\n"
         @mode = 'normal'
       else
         if line.match(/\A\s*\z/)
