@@ -7,6 +7,7 @@ module Koyori
     def to_html
       @html = ''
       @line_number = 0
+      @buffer_start_line_number = nil
       @mode = 'normal'
       @path = nil
       @buffer = ''
@@ -55,6 +56,7 @@ module Koyori
       when /\A```(?:\[([^\]]+)\])?/
         @mode = 'pre'
         @buffer = ''
+        @buffer_start_line_number = @line_number
         if Regexp.last_match[1]
           @path = Regexp.last_match[1]
         end
@@ -110,7 +112,7 @@ module Koyori
       case line
       when /\A```\s*\z/
         if @path && @path != ''
-          @html << Koyori::SourceCode.new(@buffer, @path).format
+          @html << Koyori::SourceCode.new(@buffer, @path, @buffer_start_line_number).format
         else
           @html << Koyori::Excerpt.new(@buffer).format
         end
