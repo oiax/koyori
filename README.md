@@ -55,7 +55,7 @@ what_is_koyori.koy
 format.koy
 </pre>
 
-`~/kdp/example1` に、Koyori記法でファイル群 `introduction.koy`, `what_is_koyori.koy`, `format.koy` を作成します。ここでは、ファイル名の拡張子を `.koy` としていますが、ファイル名に制限はありません。
+`~/kdp/example1` に、[Koyori記法](http://github.com/oiax/koyori/blob/master/doc/format.md)でファイル群 `introduction.koy`, `what_is_koyori.koy`, `format.koy` を作成します。ここでは、ファイル名の拡張子を `.koy` としていますが、ファイル名に制限はありません。
 
 `~/kdp/example1` に以下のような内容の新規ファイル `PROTECTED_WORDS` を作成します（任意）。
 

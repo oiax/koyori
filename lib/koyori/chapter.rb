@@ -44,8 +44,14 @@ module Koyori
       when %r{\A<div[^>]*>\s*\z}
         @html << line + "\n"
         @mode = 'div'
+      when %r{\A%%%\[([^\]]+)\]\s*(.*)\z}
+        heading = Regexp.last_match[1]
+        directives = Regexp.last_match[2]
+        @html << Koyori::Div.new(directives, heading).open_tag
+        @mode = 'div'
       when %r{\A%%%\s*(.*)\z}
-        @html << Koyori::Div.new(line).open_tag
+        directives = Regexp.last_match[1]
+        @html << Koyori::Div.new(directives).open_tag
         @mode = 'div'
       when /\A\*\s+(.*)/
         @mode = 'unordered_list'
