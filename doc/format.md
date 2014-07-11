@@ -78,6 +78,20 @@ class Foo &lt; Bar
 </pre>
 
 
+コマンドライン
+-------------
+
+<pre>
+$$$
+&gt; ssh example.com
+% sudo -s
+$ whoami
+$$$
+</pre>
+
+* 行頭の `>`, `%`, `$` はコマンドプロンプトとして扱われる。
+
+
 空行
 ----
 

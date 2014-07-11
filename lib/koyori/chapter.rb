@@ -24,6 +24,8 @@ module Koyori
           format_in_unordered_list_mode(line)
         when 'ordered_list'
           format_in_ordered_list_mode(line)
+        when 'command_line'
+          format_in_command_line_mode(line)
         when 'pre'
           format_in_pre_mode(line)
         else
@@ -53,6 +55,9 @@ module Koyori
         directives = Regexp.last_match[1]
         @html << Koyori::Div.new(directives).open_tag
         @mode = 'div'
+      when %r{\A\$\$\$\s*\z}
+        @mode = 'command_line'
+        @buffer = ''
       when /\A\*\s+(.*)/
         @mode = 'unordered_list'
         @buffer = line + "\n"
@@ -111,6 +116,18 @@ module Koyori
         @html << Koyori::OrderedList.new(@buffer).format
         @mode = 'normal'
         format_in_normal_mode(line)
+      end
+    end
+
+    def format_in_command_line_mode(line)
+      case line
+      when %r{\A\$\$\$\s*\z}
+        @html << Koyori::CommandLine.new(@buffer).format
+        @buffer = ''
+        @path = nil
+        @mode = 'normal'
+      else
+        @buffer << line + "\n"
       end
     end
 

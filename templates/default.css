@@ -24,6 +24,14 @@ pre.excerpt {
   color: #000;
   padding: 1em;
 }
+pre.command-line {
+  background-color: #444;
+  color: #fff;
+  padding: 2px;
+}
+pre.command-line span.prompt {
+  color: #aaa
+}
 div.column {
   padding: 10px;
   border: 1px solid #666;
