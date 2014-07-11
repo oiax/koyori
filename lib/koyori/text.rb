@@ -4,8 +4,12 @@ module Koyori
     RIGHT_PAREN = '）'
     START_CODE = '《'
     END_CODE = '》'
-    START_PROTECTION = '【'
-    END_PROTECTION = '】'
+    START_BOLD = '【'
+    END_BOLD = '】'
+    START_ITALIC = '△'
+    END_ITALIC = '▽'
+    START_PROTECTION = '〔'
+    END_PROTECTION = '〕'
     ASCII_CHARS = '\\x20-\\x7f'
     ENGLISH_CHARS = '[a-z]+(, [a-z]+)*'
     TEXT_CHARS = '^' + ASCII_CHARS + LEFT_PAREN + RIGHT_PAREN +
@@ -55,6 +59,8 @@ module Koyori
         end
       end
 
+      buffer.gsub!(%r!#{START_BOLD}(.*?)#{END_BOLD}!, '<b>\1</b>')
+      buffer.gsub!(%r!#{START_ITALIC}(.*?)#{END_ITALIC}!, '<i>\1</i>')
       buffer
     end
 
