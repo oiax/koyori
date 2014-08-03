@@ -108,3 +108,7 @@ h1 {
 h1#preface {
   font-size: x-large;
 }
+h1 div.number {
+  font-size: x-large;
+  color: #0071bc;
+}

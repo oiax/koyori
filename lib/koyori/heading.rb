@@ -17,7 +17,12 @@ module Koyori
     end
 
     def format
-      if @element_id
+      if @level == 1 && @element_id != 'preface'
+        @element_id.match(/chapter-(\d+)/)
+        chapter_number = Regexp.last_match[1].to_i
+        "<h1 id='#{@element_id}'><div class='number'>Chapter #{chapter_number}</div>" +
+          Koyori::Text.new(@text).format + "</h#{@level}>"
+      elsif @element_id
         "<h#{@level} id='#{@element_id}'>" + Koyori::Text.new(@text).format + "</h#{@level}>"
       else
         "<h#{@level}>" + Koyori::Text.new(@text).format + "</h#{@level}>"
