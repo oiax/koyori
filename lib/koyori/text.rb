@@ -75,7 +75,7 @@ module Koyori
 
       if PROTECTED_WORDS.include?(stem)
         stem + suffix
-      elsif string.match(%r!\A[ 0-9]*\z!)
+      elsif stem == '' && suffix != ''
         string
       else
         "<code>#{CGI.escapeHTML(string)}</code>"
