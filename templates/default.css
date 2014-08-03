@@ -96,3 +96,6 @@ p code, li code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code  {
   font-family: 'UbuntuMono', monospace;
   font-size: 100%;
 }
+p i {
+  margin: 0 0.1em;
+}
