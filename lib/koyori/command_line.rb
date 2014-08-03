@@ -8,7 +8,7 @@ module Koyori
 
     def format
       buffer = ''
-      buffer << "<pre class='command-line'>\n"
+      buffer << "<div class='command-line'>\n"
       @line_number = 1
       @text.split(/\n/).each_with_index do |line, index|
         if line.match(/^[>%$] /)
@@ -19,9 +19,9 @@ module Koyori
         else
           buffer << CGI.escapeHTML(line)
         end
-        buffer << "\n"
+        buffer << "<br />\n"
       end
-      buffer << "</pre>"
+      buffer << "</div>"
       buffer
     end
   end

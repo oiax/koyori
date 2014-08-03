@@ -7,11 +7,16 @@ module Koyori
     end
 
     def format
-      buffer = "<pre class='excerpt'>\n"
+      buffer = "<div class='excerpt'>\n"
       @text.each_line do |line|
+        line.chomp!
+        if line.sub!(/\A\s+/, '')
+          buffer << Regexp.last_match[0].gsub(/ /, '&nbsp;')
+        end
         buffer << CGI.escapeHTML(line)
+        buffer << "<br />\n"
       end
-      buffer << '</pre>'
+      buffer << '</div>'
       buffer
     end
   end

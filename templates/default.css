@@ -28,44 +28,45 @@
   font-style: italic, oblique;
 }
 
-pre.source-code {
+div.source-code {
   font-family: 'UbuntuMono', monospace;
   font-size: 90%;
-  background-color: #bbb;
+  background-color: #ddd;
   color: #000;
-  padding: 0 10px 20px 10px;
+  padding: 10px 20px 10px 20px;
+  line-height: 120%;
 }
-pre.source-code span.num {
-  font-size: 80%;
+div.source-code span.num {
+  color: #444;
+}
+div.source-code span.modified {
   font-weight: bold;
 }
-pre.source-code span.modified {
-  font-weight: bold;
-}
-pre.source-code del {
+div.source-code del {
   font-weight: bold;
   text-decoration: line-through;
 }
-pre.source-code div.path {
-  font-weight: bold;
+div.source-code span.path {
   text-decoration: underline;
-  background-color: #bbb;
+  color: #444;
 }
-pre.excerpt {
+div.excerpt {
   font-family: 'UbuntuMono', monospace;
   font-size: 90%;
   border: 1px solid #888;
   color: #000;
-  padding: 0 20px 30px 20px;
+  padding: 10px 20px 10px 20px;
+  line-height: 120%;
 }
-pre.command-line {
+div.command-line {
   font-family: 'UbuntuMono', monospace;
   background-color: #444;
   color: #fff;
-  padding: 0 20px 30px 20px;
+  padding: 10px 20px 10px 20px;
+  line-height: 120%;
 }
-pre.command-line span.prompt {
-  color: #aaa
+div.command-line span.prompt {
+  color: #888;
 }
 div.column {
   padding: 0 20px 10px 20px;
@@ -81,6 +82,7 @@ h3.column {
   border-radius: 5px;
 }
 div.note {
+  font-size: small;
   margin: 20px;
   padding: 0 20px 10px 20px;
   border: 1px solid #666;

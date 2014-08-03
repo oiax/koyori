@@ -14,8 +14,8 @@ module Koyori
 
     def format
       buffer = ''
-      buffer << "<pre style='font-family: UbuntuMono, monospace'>\n"
-      buffer << "<u>#{@path}</u>\n"
+      buffer << "<div class='source-code'>\n"
+      buffer << "<span class='path'>#{@path}</span><br />\n"
       @line_number = 1
       @text.split(/\n/).each_with_index do |line, index|
         case line
@@ -27,24 +27,24 @@ module Koyori
             error("Numbering mismatch #{s} != #{@line_number}", line, index)
           end
           @line_number = e
-          buffer << "<font color='#888'>\u22ef</font>\n"
+          buffer << "<font color='#888'>\u22ef</font><br />\n"
         when %r{\s*\(以下省略\)\s*}
-          buffer << "<font color='#888'>\u22ef</font>\n"
+          buffer << "<font color='#888'>\u22ef</font><br />\n"
         else
           buffer << process(line)
           @line_number += 1
         end
       end
-      buffer << '</pre>'
+      buffer << '</div>'
       buffer
     end
 
     private
     def process(line)
       buffer = ''
-      buffer << sprintf("<font color='#888'>%03d:</font> ", @line_number)
+      buffer << sprintf("<span class='num'>%03d:</span> ", @line_number)
       buffer << add_tags(line)
-      buffer << "\n"
+      buffer << "<br />\n"
       buffer
     end
 
@@ -52,7 +52,7 @@ module Koyori
       buffer = ''
       str = line.dup
       if str.sub!(/\A\s+/, '')
-        buffer << Regexp.last_match[0]
+        buffer << Regexp.last_match[0].gsub(/ /, '&nbsp;')
       end
       if @mode == 'modified'
         buffer << "<span style='font-family: UbuntuMono; font-weight: bold'>"
