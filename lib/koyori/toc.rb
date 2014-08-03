@@ -75,6 +75,26 @@ module Koyori
       end
     end
 
+    def to_nav_map
+      builder = Nokogiri::XML::Builder.new do |m|
+        m.ncx do
+          m.navMap do
+            @chapters.each_with_index do |chapter, i|
+              m.navPoint(:class => 'chapter', :id => sprintf("chapter-%02d", i + 1), :playOrder => i + 1) do
+                m.navLabel do
+                  heading = chapter[:heading]
+                  heading.gsub!(%r{</?\w+[^>]*>}, '')
+                  m << "<text>#{heading}</text>\n"
+                end
+                m.content(:src => sprintf("book.html#chapter-%02d", i + 1))
+              end
+            end
+          end
+        end
+      end
+      builder.to_xml
+    end
+
     class << self
       def get
         @singleton ||= self.new

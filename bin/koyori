@@ -33,6 +33,9 @@ def _main
   File.open('book.html', 'w') do |f|
     f.write Koyori::Layout.new(body, config).output
   end
+  File.open('toc.ncx', 'w') do |f|
+    f.write Koyori::Toc.get.to_nav_map
+  end
 end
 
 main
