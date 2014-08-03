@@ -1,7 +1,8 @@
 module Koyori
   class Chapter
-    def initialize(source)
+    def initialize(source, file_name)
       @source = source
+      @file_name = file_name
     end
 
     def to_html
@@ -42,7 +43,11 @@ module Koyori
       when /\A(\#{1,6})\s+(.*)/
         level = Regexp.last_match[1].length
         text = Regexp.last_match[2]
-        @html << Koyori::Heading.new(level, text).format
+        if @file_name == 'preface.koy'
+          @html << Koyori::PrefaceHeading.new(text).format
+        else
+          @html << Koyori::Heading.new(level, text).format
+        end
       when %r{\A<div[^>]*>\s*\z}
         @html << line + "\n"
         @mode = 'div'

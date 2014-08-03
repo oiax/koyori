@@ -24,4 +24,15 @@ module Koyori
       end
     end
   end
+
+  class PrefaceHeading < Heading
+    def initialize(text)
+      @level = 1
+      @text = text
+      @element_id = 'preface'
+      toc = Koyori::Toc.get
+      raise "The preface heading has been declared twice." if toc.preface_heading
+      toc.set_preface_heading(text)
+    end
+  end
 end

@@ -50,12 +50,14 @@ date: 2014-08-01
 `~/kdp/example1` に以下のような内容の新規ファイル `CHAPTERS` を作成します。
 
 <pre>
-introduction.koy
-what_is_koyori.koy
-format.koy
+preface.koy
+what_is_ruby.koy
+ruby_is_fun.koy
 </pre>
 
-`~/kdp/example1` に、[Koyori記法](http://github.com/oiax/koyori/blob/master/doc/format.md)でファイル群 `introduction.koy`, `what_is_koyori.koy`, `format.koy` を作成します。ここでは、ファイル名の拡張子を `.koy` としていますが、ファイル名に制限はありません。
+`~/kdp/example1` に、[Koyori記法](http://github.com/oiax/koyori/blob/master/doc/format.md)でファイル群 `preface.koy`, `what_is_ruby.koy`, `ruby_is_fun.koy` を作成します。ここでは、ファイル名の拡張子を `.koy` としていますが、ファイル名に制限はありません。
+
+`preface.koy` という名前のファイルは「前書き」の内容を含むものとして特別扱いされます。「前書き」がある場合、「目次」は「前書き」の後ろに挿入されます。
 
 `~/kdp/example1` に以下のような内容の新規ファイル `PROTECTED_WORDS` を作成します（任意）。
 

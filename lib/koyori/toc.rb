@@ -2,13 +2,14 @@ module Koyori
   class Toc
     include HtmlBuilder
 
-    attr_reader :chapters
+    attr_reader :chapters, :preface_heading
 
     def initialize
       @chapters = []
       @chapter_number = 0
       @section_number = 0
       @subsection_number = 0
+      @preface_heading = nil
     end
 
     def add_chapter(heading)
@@ -38,6 +39,10 @@ module Koyori
       section[:subsections] << heading
       @subsection_number += 1
       sprintf "subsection-%02d-%02d-%02d", @chapter_number, @section_number, @subsection_number
+    end
+
+    def set_preface_heading(heading)
+      @preface_heading = heading
     end
 
     def to_html
@@ -79,12 +84,22 @@ module Koyori
       builder = Nokogiri::XML::Builder.new do |m|
         m.ncx do
           m.navMap do
+            if @preface_heading
+              m.navPoint(:class => 'preface', :id => 'preface', :playOrder => 0) do
+                m.navLabel do
+                  heading = @preface_heading
+                  heading.gsub!(%r{</?\w+[^>]*>}, '')
+                  m << "<text>#{heading}</text>\n"
+                end
+                m.content(:src => "book.html#preface")
+              end
+            end
             @chapters.each_with_index do |chapter, i|
               m.navPoint(:class => 'chapter', :id => sprintf("chapter-%02d", i + 1), :playOrder => i + 1) do
                 m.navLabel do
                   heading = chapter[:heading]
                   heading.gsub!(%r{</?\w+[^>]*>}, '')
-                  m << "<text>#{heading}</text>\n"
+                  m << "<text>Chapter #{i + 1} #{heading}</text>\n"
                 end
                 m.content(:src => sprintf("book.html#chapter-%02d", i + 1))
               end
