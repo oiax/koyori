@@ -41,6 +41,7 @@ Koyori を最新版にアップデートする手順：
 
 <pre>
 file_name: neko_ruby
+language: ja-jp
 title: 猫でも分かるRuby
 author: 例示 花子
 publisher: 株式会社エグザンプル

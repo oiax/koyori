@@ -16,7 +16,7 @@ rescue Errno::EPIPE
 end
 
 def _main
-  config = YAML.load_file('config.yml')
+  config = Koyori::Config.new
 
   preface = ''
   body = ''
@@ -40,6 +40,9 @@ def _main
   end
   File.open('toc.ncx', 'w') do |f|
     f.write Koyori::Toc.get.to_nav_map
+  end
+  File.open('content.opf', 'w') do |f|
+    f.write config.to_opf
   end
 end
 

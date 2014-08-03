@@ -81,7 +81,7 @@ module Koyori
     end
 
     def to_nav_map
-      builder = Nokogiri::XML::Builder.new do |m|
+      builder = Nokogiri::XML::Builder.new(encoding: 'utf-8') do |m|
         m.ncx do
           m.navMap do
             if @preface_heading
