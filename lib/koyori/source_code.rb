@@ -27,9 +27,9 @@ module Koyori
             error("Numbering mismatch #{s} != #{@line_number}", line, index)
           end
           @line_number = e
-          buffer << "<font color='#888'>\u22ef</font><br />\n"
+          buffer << "<span class='num'>\u22ef</span><br />\n"
         when %r{\s*\(以下省略\)\s*}
-          buffer << "<font color='#888'>\u22ef</font><br />\n"
+          buffer << "<span class='num'>\u22ef</span><br />\n"
         else
           buffer << process(line)
           @line_number += 1
