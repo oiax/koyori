@@ -1,39 +1,74 @@
+@font-face {
+  font-family: UbuntuMono;
+  src: url(fonts/UbuntuMono-R.ttf);
+}
+@font-face {
+  font-family: UbuntuMono;
+  src: url(fonts/UbuntuMono-B.ttf);
+  font-weight: bold;
+}
+@font-face {
+  font-family: FreeSerif;
+  src: url(fonts/FreeSerif.ttf);
+}
+@font-face {
+  font-family: FreeSerif;
+  src: url(fonts/FreeSerifBold.ttf);
+  font-weight: bold;
+}
+@font-face {
+  font-family: FreeSerif;
+  src: url(fonts/FreeSerifItalic.ttf);
+  font-style: italic, oblique;
+}
+@font-face {
+  font-family: FreeSerif;
+  src: url(fonts/FreeSerifBoldItalic.ttf);
+  font-weight: bold;
+  font-style: italic, oblique;
+}
+
 pre.source-code {
+  font-family: 'UbuntuMono', monospace;
   font-size: 90%;
   background-color: #bbb;
   color: #000;
-  padding: 1em;
+  padding: 0 10px 20px 10px;
 }
 pre.source-code span.num {
-  color: #fff;
+  font-size: 80%;
+  font-weight: bold;
 }
 pre.source-code span.modified {
-  background-color: #fff;
+  font-weight: bold;
 }
 pre.source-code del {
-  background-color: #888;
+  font-weight: bold;
+  text-decoration: line-through;
 }
 pre.source-code div.path {
-  padding: 0.5em;
-  background-color: #666;
-  color: #fff;
+  font-weight: bold;
+  text-decoration: underline;
+  background-color: #bbb;
 }
 pre.excerpt {
+  font-family: 'UbuntuMono', monospace;
   font-size: 90%;
   border: 1px solid #888;
   color: #000;
-  padding: 1em;
+  padding: 0 20px 30px 20px;
 }
 pre.command-line {
+  font-family: 'UbuntuMono', monospace;
   background-color: #444;
   color: #fff;
-  padding: 2px;
+  padding: 0 20px 30px 20px;
 }
 pre.command-line span.prompt {
   color: #aaa
 }
 div.column {
-  padding: 10px;
+  padding: 0 20px 10px 20px;
   border: 1px solid #666;
   background-color: #ddd;
   color: #000;
@@ -46,11 +81,16 @@ h3.column {
   border-radius: 5px;
 }
 div.note {
-  margin: 5%;
-  padding: 2% 5%;
+  margin: 20px;
+  padding: 0 20px 10px 20px;
   border: 1px solid #666;
   border-radius: 10px;
 }
+p {
+  font-family: 'FreeSerif', sanserif;
+}
 p code, li code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code  {
-  margin: 0 0.2em;
+  margin: 0 0.1em;
+  font-family: 'UbuntuMono', monospace;
+  font-size: 100%;
 }

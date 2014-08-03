@@ -14,8 +14,8 @@ module Koyori
 
     def format
       buffer = ''
-      buffer << "<pre class='source-code'>\n"
-      buffer << "<div class='path'>#{@path}</div>\n"
+      buffer << "<pre style='font-family: UbuntuMono, monospace'>\n"
+      buffer << "<u>#{@path}</u>\n"
       @line_number = 1
       @text.split(/\n/).each_with_index do |line, index|
         case line
@@ -27,9 +27,9 @@ module Koyori
             error("Numbering mismatch #{s} != #{@line_number}", line, index)
           end
           @line_number = e
-          buffer << "<span class='num'>\u22ef</span>\n"
+          buffer << "<font color='#888'>\u22ef</font>\n"
         when %r{\s*\(以下省略\)\s*}
-          buffer << "<span class='num'>\u22ef</span>\n"
+          buffer << "<font color='#888'>\u22ef</font>\n"
         else
           buffer << process(line)
           @line_number += 1
@@ -42,7 +42,7 @@ module Koyori
     private
     def process(line)
       buffer = ''
-      buffer << sprintf("<span class='num'>%03d:</span> ", @line_number)
+      buffer << sprintf("<font color='#888'>%03d:</font> ", @line_number)
       buffer << add_tags(line)
       buffer << "\n"
       buffer
@@ -55,7 +55,7 @@ module Koyori
         buffer << Regexp.last_match[0]
       end
       if @mode == 'modified'
-        buffer << "<span class='modified'>"
+        buffer << "<span style='font-family: UbuntuMono; font-weight: bold'>"
       elsif @mode == 'deleted'
         buffer << "<del>"
       end
@@ -66,7 +66,7 @@ module Koyori
             buffer << CGI.escapeHTML(Regexp.last_match[0])
             str = Regexp.last_match.post_match
           elsif str.match(/\A#{MOD_SIGN}/)
-            buffer << "<span class='modified'>"
+            buffer << "<span style='font-family: UbuntuMono; font-weight: bold'>"
             str = Regexp.last_match.post_match
             @mode = 'modified'
           elsif str.match(/\A#{DEL_SIGN}/)
@@ -97,7 +97,7 @@ module Koyori
         end
       end
       if @mode == 'modified'
-        buffer << "</span>"
+        buffer << "</b>"
       elsif @mode == 'deleted'
         buffer << "</del>"
       end
