@@ -10,22 +10,25 @@
 @font-face {
   font-family: FreeSerif;
   src: url(fonts/FreeSerif.ttf);
+  font-weight: normal;
+  font-style: normal;
 }
 @font-face {
   font-family: FreeSerif;
   src: url(fonts/FreeSerifBold.ttf);
   font-weight: bold;
+  font-style: normal;
 }
 @font-face {
   font-family: FreeSerif;
   src: url(fonts/FreeSerifItalic.ttf);
-  font-style: italic, oblique;
+  font-style: italic;
 }
 @font-face {
   font-family: FreeSerif;
   src: url(fonts/FreeSerifBoldItalic.ttf);
   font-weight: bold;
-  font-style: italic, oblique;
+  font-style: italic;
 }
 
 div.source-code {
@@ -97,5 +100,8 @@ p code, li code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code  {
   font-size: 100%;
 }
 p i {
-  margin: 0 0.1em;
+  margin: 0 0.2em;
+}
+h1 {
+  page-break-before: right;
 }
