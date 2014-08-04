@@ -10,6 +10,7 @@ module Koyori
     END_ITALIC = '▽'
     START_PROTECTION = '〔'
     END_PROTECTION = '〕'
+    FIGURE_NUMBER = '図●'
     ASCII_CHARS = '\\x20-\\x7f'
     ENGLISH_CHARS = '[a-z]+(, [a-z]+)*'
     TEXT_CHARS = '^' + ASCII_CHARS + LEFT_PAREN + RIGHT_PAREN +
@@ -61,6 +62,11 @@ module Koyori
 
       buffer.gsub!(%r!#{START_BOLD}(.*?)#{END_BOLD}!, '<b>\1</b>')
       buffer.gsub!(%r!#{START_ITALIC}(.*?)#{END_ITALIC}!, '<i>\1</i>')
+      figure_number = Koyori::Figure.next_number - 1
+      buffer.gsub!(%r!#{FIGURE_NUMBER}!) do |text|
+        figure_number += 1
+        "図#{figure_number}"
+      end
       buffer
     end
 

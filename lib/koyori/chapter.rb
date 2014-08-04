@@ -63,6 +63,10 @@ module Koyori
       when %r{\A\$\$\$\s*\z}
         @mode = 'command_line'
         @buffer = ''
+      when %r{\A@@@\[([^\]]+)\]\[([^\]]+)\]\s*\z}
+        src = Regexp.last_match[1]
+        title = Regexp.last_match[2]
+        @html << Koyori::Figure.new(src, title).format
       when /\A\*\s+(.*)/
         @mode = 'unordered_list'
         @buffer = line + "\n"

@@ -112,3 +112,10 @@ h1 div.number {
   font-size: x-large;
   color: #0071bc;
 }
+div.figure {
+  text-align: center;
+  page-break-inside: avoid;
+}
+div.figure span.caption {
+  font-size: small;
+}
