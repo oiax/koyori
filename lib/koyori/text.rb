@@ -39,9 +39,9 @@ module Koyori
           buffer << Regexp.last_match[0]
           next
         end
-        @content = @content.sub(%r!\A#{START_CODE}.*?#{END_CODE}!, '')
+        @content = @content.sub(%r!\A#{START_CODE}(.*?)#{END_CODE}!, '')
         if Regexp.last_match
-          buffer << add_code_tags(Regexp.last_match[0])
+          buffer << "<code>#{CGI.escapeHTML(Regexp.last_match[1])}</code>"
           next
         end
         @content = @content.sub(%r!\A#{START_PROTECTION}(.*?)#{END_PROTECTION}!, '')
