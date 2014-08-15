@@ -63,7 +63,7 @@ module Koyori
         case @mode
         when 'normal'
           if str.match(/\A[^#{MOD_SIGN}#{DEL_SIGN}]+/)
-            buffer << CGI.escapeHTML(Regexp.last_match[0])
+            buffer << escape(Regexp.last_match[0])
             str = Regexp.last_match.post_match
           elsif str.match(/\A#{MOD_SIGN}/)
             buffer << "<span style='font-family: UbuntuMono; font-weight: bold'>"
@@ -78,7 +78,7 @@ module Koyori
           end
         when 'modified'
           if str.match(/\A[^#{MOD_SIGN}]+/)
-            buffer << CGI.escapeHTML(Regexp.last_match[0])
+            buffer << escape(Regexp.last_match[0])
             str = Regexp.last_match.post_match
           elsif str.match(/\A#{MOD_SIGN}/)
             buffer << "</span>"
@@ -87,7 +87,7 @@ module Koyori
           end
         when 'deleted'
           if str.match(/\A[^#{DEL_SIGN}]+/)
-            buffer << CGI.escapeHTML(Regexp.last_match[0])
+            buffer << escape(Regexp.last_match[0])
             str = Regexp.last_match.post_match
           elsif str.match(/\A#{DEL_SIGN}/)
             buffer << "</del>"
@@ -102,6 +102,10 @@ module Koyori
         buffer << "</del>"
       end
       buffer
+    end
+
+    def escape(str)
+      CGI.escapeHTML(str).gsub(/ /, '&nbsp;')
     end
 
     def error(message, src, index)
