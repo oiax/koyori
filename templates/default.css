@@ -119,3 +119,6 @@ div.figure {
 div.figure span.caption {
   font-size: small;
 }
+div.illustration {
+  text-align: center;
+}

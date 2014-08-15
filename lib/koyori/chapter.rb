@@ -67,6 +67,9 @@ module Koyori
         src = Regexp.last_match[1]
         title = Regexp.last_match[2]
         @html << Koyori::Figure.new(src, title).format
+      when %r{\A@@@\[([^\]]+)\]\s*\z}
+        src = Regexp.last_match[1]
+        @html << Koyori::Illustration.new(src).format
       when /\A\*\s+(.*)/
         @mode = 'unordered_list'
         @buffer = line + "\n"
