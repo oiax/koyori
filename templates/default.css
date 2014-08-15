@@ -95,12 +95,12 @@ p {
   font-family: 'FreeSerif', sanserif;
 }
 p code, li code, h1 code, h2 code, h3 code, h4 code, h5 code, h6 code  {
-  margin: 0 0.1em;
+  margin: 0 0.2em;
   font-family: 'UbuntuMono', monospace;
   font-size: 100%;
 }
 p i {
-  margin: 0 0.2em;
+  margin: 0 0.3em 0 0.2em;
 }
 h1 {
   page-break-before: right;
